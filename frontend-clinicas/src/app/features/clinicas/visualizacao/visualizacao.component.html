@@ -1,1 +1,19 @@
-<p>visualizacao !</p>
+<mat-card class="card">
+  <h2>Detalhes da Clínica</h2>
+
+  <p><strong>Razão Social:</strong> {{ clinica.razaoSocial }}</p>
+  <p><strong>Nome Fantasia:</strong> {{ clinica.nomeFantasia }}</p>
+  <p><strong>CNPJ:</strong> {{ clinica.cnpj }}</p>
+  <p><strong>Regional:</strong> {{ clinica.regional }}</p>
+  <p><strong>Data de Inauguração:</strong> {{ clinica.dataInauguracao }}</p>
+  <p><strong>Ativa:</strong> {{ clinica.ativa ? 'Sim' : 'Não' }}</p>
+
+  <p><strong>Especialidades:</strong></p>
+  <ul>
+    <li *ngFor="let e of especialidadesLimitadas">{{ e }}</li>
+  </ul>
+
+  <button *ngIf="hasMaisEspecialidades" mat-button color="primary" (click)="verTodasEspecialidades()">
+    Ver todas especialidades
+  </button>
+</mat-card>

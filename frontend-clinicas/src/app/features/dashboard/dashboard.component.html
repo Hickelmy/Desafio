@@ -1,10 +1,14 @@
 <div class="dashboard-wrapper">
   <div class="dashboard-card">
-    <h2>Bem-vindo ao Painel</h2>
-    <p>Você está autenticado com sucesso.</p>
+    <h2>Bem-vindo!</h2>
+    <p>Você está logado{{ userEmail ? ' como ' + userEmail : '' }}.</p>
 
-    <button mat-raised-button color="warn" (click)="onLogout()">
-      Sair
+    <div class="botoes">
+    <button mat-raised-button color="primary" (click)="irParaClinicas()">
+        Ir para Clínicas
     </button>
+
+      <button mat-stroked-button color="warn" (click)="onLogout()">Sair</button>
+    </div>
   </div>
 </div>
