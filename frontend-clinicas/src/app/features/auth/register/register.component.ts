@@ -9,9 +9,9 @@ import { AuthService } from '../../../core/auth.service';
 
 @Component({
   standalone: true,
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss'],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -21,7 +21,7 @@ import { AuthService } from '../../../core/auth.service';
     MatButtonModule
   ]
 })
-export class LoginComponent implements OnInit {
+export class RegisterComponent implements OnInit {
   private fb: FormBuilder = inject(FormBuilder);
   private authService: AuthService = inject(AuthService);
   private router: Router = inject(Router);
@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
+      nome: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       senha: ['', Validators.required]
     });
@@ -43,15 +44,17 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    const { email, senha } = this.form.value;
-
     this.loading = true;
-    this.authService.login(email!, senha!).subscribe({
-      next: () => this.router.navigate(['/dashboard']),
+
+    const { nome, email, senha } = this.form.value;
+
+   this.authService.register(nome!, email!, senha!).subscribe({
+      next: () => this.router.navigate(['/login']),
       error: (err: any) => {
-        this.loading = false;
-        this.error = err?.error?.message || 'Erro ao fazer login';
+      this.loading = false;
+      this.error = err?.error?.message || 'Erro ao registrar';
       }
     });
+
   }
 }

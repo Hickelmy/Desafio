@@ -1,10 +1,16 @@
 <div class="login-wrapper">
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="login-card">
-    <h2>Login</h2>
+    <h2>Registro</h2>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="nome" />
+      <mat-error *ngIf="form.get('nome')?.hasError('required')">Campo obrigatório</mat-error>
+    </mat-form-field>
 
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>E-mail</mat-label>
-      <input matInput formControlName="email" type="email" />
+      <input matInput formControlName="email" />
       <mat-error *ngIf="form.get('email')?.hasError('required')">Campo obrigatório</mat-error>
       <mat-error *ngIf="form.get('email')?.hasError('email')">E-mail inválido</mat-error>
     </mat-form-field>
@@ -16,15 +22,11 @@
     </mat-form-field>
 
     <button mat-raised-button color="primary" class="full-width" type="submit">
-      ENTRAR
+      REGISTRAR
     </button>
 
-    <div *ngIf="error" style="color: red; margin-top: 0.5rem;">
-      {{ error }}
-    </div>
+    <div *ngIf="error" style="color: red;">{{ error }}</div>
 
-    <a routerLink="/register" style="margin-top: 1rem; display: block; text-align: center;">
-      Não tem conta? Cadastre-se
-    </a>
+    <a routerLink="/login" style="margin-top: 1rem; display: block; text-align: center;">Já tem uma conta? Fazer login</a>
   </form>
 </div>
