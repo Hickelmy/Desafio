@@ -1,0 +1,36 @@
+.layout-container {
+  height: 100vh;
+  background-color: var(--bg-main);
+}
+
+mat-sidenav-content {
+  background-color: var(--bg-main); // 👈 aplicar aqui
+  color: var(--sidebar-text);
+}
+
+.sidenav {
+  width: 240px;
+  background-color: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-grid {
+  display: grid;
+  gap: 2rem;
+  padding: 1.5rem;
+
+  // Mobile: empilha tudo em 1 coluna
+  grid-template-columns: 1fr;
+
+  @media (min-width: 1024px) {
+    // Desktop: separa esquerda e direita
+    grid-template-columns: 2fr 1fr;
+
+    .left,
+    .right {
+      display: grid;
+      gap: 1.5rem;
+    }
+  }
+}

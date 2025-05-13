@@ -1,0 +1,35 @@
+<aside class="sidebar">
+  <div class="brand">
+    <mat-icon>medical_services</mat-icon>
+    <span>SmartClinic</span>
+  </div>
+
+  <nav class="nav-list">
+    <a routerLink="/dashboard" routerLinkActive="active">
+      <mat-icon>dashboard</mat-icon>
+      <span>Dashboard</span>
+    </a>
+
+    <a routerLink="/clinicas" routerLinkActive="active">
+      <mat-icon>local_hospital</mat-icon>
+      <span>Clínicas</span>
+    </a>
+
+    <a routerLink="/usuarios" routerLinkActive="active">
+      <mat-icon>people</mat-icon>
+      <span>Usuários</span>
+    </a>
+
+    <a routerLink="/login">
+      <mat-icon>logout</mat-icon>
+      <span>Sair</span>
+    </a>
+  </nav>
+
+  <div class="theme-toggle">
+    <button mat-button (click)="toggleTheme()">
+      <mat-icon>{{ isDark ? 'light_mode' : 'dark_mode' }}</mat-icon>
+      <span>{{ isDark ? 'Light Mode' : 'Dark Mode' }}</span>
+    </button>
+  </div>
+</aside>

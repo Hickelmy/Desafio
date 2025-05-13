@@ -1,0 +1,12 @@
+<mat-card class="chart-wrapper">
+  <h3>Department Distribution</h3>
+
+  <ngx-charts-pie-chart
+    [results]="data"
+    [legend]="true"
+    [scheme]="colorScheme"
+    [doughnut]="false"
+    [labels]="true"
+    [animations]="true"
+  />
+</mat-card>

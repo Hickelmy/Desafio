@@ -1,0 +1,44 @@
+.topbar {
+  height: 64px;
+  background-color: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+  .menu-btn {
+    display: none;
+    @media (max-width: 768px) {
+      display: inline-flex;
+    }
+  }
+
+  .title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    .avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    span {
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      span {
+        display: none;
+      }
+    }
+  }
+}

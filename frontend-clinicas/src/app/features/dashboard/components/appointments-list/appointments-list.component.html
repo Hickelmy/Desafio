@@ -1,0 +1,30 @@
+<mat-card class="appointments-card">
+  <h3>Appointments</h3>
+
+  <div *ngFor="let item of appointments" class="appointment-row">
+    <div class="patient-info">
+      <div class="avatar" [style.borderLeftColor]="item.patient.color">
+        <img [src]="item.patient.avatar" alt="Paciente" />
+      </div>
+      <div class="info">
+        <a href="#" class="name">{{ item.patient.name }}</a>
+        <p>{{ item.patient.phone }}</p>
+      </div>
+    </div>
+
+    <div class="datetime">
+      <p>{{ item.date }}</p>
+      <p>{{ item.time }}</p>
+    </div>
+
+    <div class="doctor-info">
+      <img [src]="item.doctor.avatar" alt="Doutor" />
+      <div>
+        <a href="#" class="name">{{ item.doctor.name }}</a>
+        <p>{{ item.doctor.specialization }}</p>
+      </div>
+    </div>
+
+    <mat-icon class="arrow">chevron_right</mat-icon>
+  </div>
+</mat-card>

@@ -1,0 +1,28 @@
+<mat-sidenav-container class="layout-container">
+  <mat-sidenav
+    #sidenav
+    class="sidenav"
+    [mode]="isMobile ? 'over' : 'side'"
+    [(opened)]="opened"
+    [fixedInViewport]="isMobile"
+    (backdropClick)="opened = false"
+  >
+    <app-sidebar (click)="isMobile ? sidenav.close() : null" />
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <app-topbar (toggle)="toggleSidebar()" />
+
+    <div class="dashboard-grid">
+      <div class="left">
+        <app-stats-summary />
+        <app-appointments-list />
+      </div>
+
+      <div class="right">
+        <app-doctor-of-the-month />
+        <app-division-pie-chart />
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
