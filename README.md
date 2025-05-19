@@ -32,13 +32,13 @@ git clone https://github.com/Hickelmy/Desafio.gitt
 
 2. **Frontend**
 ```bash
-cd frontend
+cd frontend-clinicas
 docker compose up -d --build
 ```
 
 3. **Backend**
 ```bash
-cd backend
+cd backend-clinicas
 docker compose up -d --build
 ```
 
