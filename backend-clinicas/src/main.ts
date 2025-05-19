@@ -3,19 +3,24 @@ import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import * as bodyParser from 'body-parser';
 import { SeedService } from './seed/seed.service';
+import * as crypto from 'crypto';
+
+if (typeof globalThis.crypto === 'undefined') {
+  globalThis.crypto = crypto as any;
+}
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
 
-  const port: number = configService.get<number>('PORT') ?? 3000;
+  const port = configService.get<number>('PORT') || 3000;
 
   app.use(bodyParser.json({ limit: '10mb' }));
   app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 
   app.enableCors({
     origin: ['http://localhost:4200'],
-    credentials: true
+    credentials: true,
   });
 
   const seedService = app.get(SeedService);

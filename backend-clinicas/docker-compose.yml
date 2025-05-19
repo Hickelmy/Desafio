@@ -16,21 +16,25 @@ services:
       - app-network
 
   api:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: clinicas_api
     ports:
-      - "3000:3000"
-    volumes:
-      - .:/app
+      - "4200:4200"
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@db:5432/clinicas
     depends_on:
       - db
     networks:
       - app-network
-    environment:
-      DATABASE_URL: postgres://postgres:postgres@db:5432/clinicas
+    volumes:
+      # Monta somente a pasta de código-fonte para evitar sobrescrever node_modules
+      - ./src:/app/src:ro
 
 volumes:
   pgdata:
 
 networks:
   app-network:
+    driver: bridge

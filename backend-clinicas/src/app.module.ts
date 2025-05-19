@@ -1,5 +1,5 @@
-import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { Module, Logger } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AuthModule } from './auth/auth.module';
@@ -13,18 +13,26 @@ import { DoctorModule } from './doctor/doctor.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true, 
+      isGlobal: true,
     }),
 
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: process.env.DB_HOST || 'localhost',
-      port: parseInt(process.env.DB_PORT, 10) || 5432,
-      username: process.env.DB_USER || 'postgres',
-      password: process.env.DB_PASS || 'postgres',
-      database: process.env.DB_NAME || 'clinicas',
-      synchronize: true,
-      autoLoadEntities: true,
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => {
+        const dbUrl = config.get<string>('DATABASE_URL');
+
+        if (!dbUrl) {
+          Logger.error('DATABASE_URL não definida no ambiente.');
+          throw new Error('DATABASE_URL is missing.');
+        }
+
+        return {
+          type: 'postgres',
+          url: dbUrl,
+          synchronize: true,
+          autoLoadEntities: true,
+        };
+      },
     }),
 
     AuthModule,
@@ -33,7 +41,7 @@ import { DoctorModule } from './doctor/doctor.module';
     EspecialidadeModule,
     SeedModule,
     PatientsModule,
-    DoctorModule
+    DoctorModule,
   ],
 })
 export class AppModule {}

@@ -1,31 +1,28 @@
-# Use imagem menor e mais segura
-FROM node:18-alpine as build
+# Etapa 1 - Build
+FROM node:20-alpine AS builder
 
-# Diretório de trabalho
 WORKDIR /app
 
-# Copia apenas os arquivos necessários para instalar as dependências
+# Copia apenas arquivos de dependência para aproveitar cache
 COPY package*.json ./
-
-# Instala dependências de desenvolvimento e produção
 RUN npm install
 
-# Copia o restante dos arquivos da aplicação
+# Copia o restante do código e builda a aplicação
 COPY . .
-
-# Compila o projeto (assumindo que `npm run build` gera `dist/`)
 RUN npm run build
 
-# ----------------------------------------------------------
-# Fase de produção: apenas arquivos necessários são mantidos
-FROM node:18-alpine as production
+# Etapa 2 - Produção mínima
+FROM node:20-alpine AS production
 
 WORKDIR /app
 
-# Copia apenas o que é necessário para rodar a aplicação
-COPY --from=build /app/package*.json ./
-COPY --from=build /app/node_modules ./node_modules
-COPY --from=build /app/dist ./dist
+# Copia apenas o necessário da build
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/dist ./dist
 
-# Define o comando para rodar a aplicação
+# Define variável de ambiente
+ENV NODE_ENV=production
+
+# Comando padrão
 CMD ["node", "dist/main"]
