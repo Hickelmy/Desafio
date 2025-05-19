@@ -5,7 +5,7 @@ Sistema completo com autenticação, painel administrativo, CRUD de clínicas e 
 ## 📦 Tecnologias utilizadas
 
 ### Frontend
-- Angular 17
+- Angular 17+
 - Angular Material
 - NGXS (ou NGRX)
 - RXJS
