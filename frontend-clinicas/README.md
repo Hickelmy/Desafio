@@ -1,59 +1,146 @@
-# Frontend
+# 🏥 Projeto Full Stack - Gestão de Clínicas
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.1.
+Sistema completo com autenticação, painel administrativo, CRUD de clínicas e funcionalidades modernas como tema escuro, responsividade e persistência de dados com Angular 17 e NestJS.
 
-## Development server
+## 📦 Tecnologias utilizadas
 
-To start a local development server, run:
+### Frontend
+- Angular 17
+- Angular Material
+- NGXS (ou NGRX)
+- RXJS
+- SCSS, Tailwind , Angular Material
+- Lazy loading + ChangeDetectionStrategy.OnPush
 
+### Backend
+- NestJS
+- TypeORM
+- PostgreSQL ou SQLite
+- DTOs + Validações
+- Docker + Docker Compose
+
+---
+
+## 🚀 Como rodar o projeto
+
+### 🐳 Usando Docker
+
+1. **Clone o projeto**
 ```bash
+git clone https://github.com/seu-usuario/seu-repo.git
+cd seu-repo
+```
+
+2. **Frontend**
+```bash
+cd frontend
+docker compose up -d --build
+```
+
+3. **Backend**
+```bash
+cd backend
+docker compose up -d --build
+```
+
+4. Acesse:
+- Frontend: [http://localhost:4200](http://localhost:4200)
+- Backend: [http://localhost:3000](http://localhost:3000/api)
+
+> Certifique-se de que as portas 4200 e 3000 estejam livres.
+
+---
+
+## 🧪 Scripts úteis
+
+### Frontend
+```bash
+cd frontend
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+### Backend
 ```bash
-ng generate component component-name
+cd backend
+npm install
+npm run start:dev
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## 🔐 Funcionalidade: Autenticação
 
-## Building
+- Tela de login com validação de campos
+- Feedback visual de erro e carregamento
+- Ícone para exibir/esconder senha
+- Armazenamento persistente via `store` + `refresh token`
+- Redirecionamento automático após autenticação
 
-To build the project run:
+---
 
-```bash
-ng build
-```
+## 🧾 Funcionalidade: CRUD de Clínicas
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### 📄 Listagem
+- Tabela com paginação e ordenação
+- Filtro com debounce
+- Ações de editar e visualizar
+- Estado do filtro salvo na URL
 
-## Running unit tests
+### ✏️ Cadastro / Edição
+- Formulário reativo com validações (incluindo CNPJ e especialidades mínimas)
+- Regional com select assíncrono
+- Feedback visual de erro/sucesso
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### 👁️ Visualização
+- Layout humanizado e responsivo
+- Modal para ver todas as especialidades se >5
+- Tela protegida até dados carregarem
 
-```bash
-ng test
-```
+---
 
-## Running end-to-end tests
+## 🗂️ Campos esperados para cadastro
 
-For end-to-end (e2e) testing, run:
+| Campo                        | Tipo         | Obrigatório |
+|-----------------------------|--------------|-------------|
+| Razão social                | texto        | ✅          |
+| Nome fantasia               | texto        | ✅          |
+| CNPJ                        | texto        | ✅ + validação |
+| Regional                    | select       | ✅          |
+| Data de inauguração         | data         | ✅          |
+| Ativa                       | checkbox     | ❌          |
+| Especialidades médicas      | multi-select | ✅ mínimo 5 |
 
-```bash
-ng e2e
-```
+---
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## 🧱 Backend - Organização
 
-## Additional Resources
+- Arquitetura modular
+- DTOs para validação e filtro
+- Erros tratados com interceptadores
+- Login com JWT + Refresh Token
+- Docker com banco embutido (Postgres ou SQLite)
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+
+## 🖼 Mockups
+
+- Acesse os mockups das telas no [Excalidraw](https://excalidraw.com/)
+- Importe o arquivo `embed_scente_amorsaude_front.excalidraw (2).svg` para visualizar
+
+---
+
+## 📚 Boas práticas esperadas
+
+- Gerenciamento de estado imutável com NGXS/NGRX
+- ChangeDetection `OnPush` para melhor performance
+- Sem lógica diretamente nos templates
+- Lazy loading de módulos
+- Código limpo, tipado e bem comentado
+
+---
+
+## 🧙 Dica final
+
+> No fim do dia, você estará escrevendo código para outros devs.  
+> Deixe a mágica para o Merlin, e evite variáveis como `x`, `y`, `z` 😄
