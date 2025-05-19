@@ -27,8 +27,7 @@ Sistema completo com autenticação, painel administrativo, CRUD de clínicas e 
 
 1. **Clone o projeto**
 ```bash
-git clone https://github.com/seu-usuario/seu-repo.git
-cd seu-repo
+git clone https://github.com/Hickelmy/Desafio.gitt
 ```
 
 2. **Frontend**
