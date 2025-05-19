@@ -47,6 +47,10 @@ export class PatientsService {
     return this.repo.save(patient);
   }
 
+  async count(): Promise<number> {
+    return this.repo.count();
+  }
+
   async remove(id: string): Promise<void> {
     const patient = await this.findOne(id);
     await this.repo.remove(patient);

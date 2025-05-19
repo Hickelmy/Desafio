@@ -1,9 +1,8 @@
 <div class="stats-grid">
-  <mat-card *ngFor="let item of stats" class="stat-card">
+  <mat-card *ngFor="let item of stats$ | async" class="stat-card">
     <div class="icon" [style.backgroundColor]="item.color + '20'">
       <mat-icon [style.color]="item.color">{{ item.icon }}</mat-icon>
     </div>
-
     <div class="info">
       <h4>{{ item.value }}</h4>
       <p>{{ item.label }}</p>

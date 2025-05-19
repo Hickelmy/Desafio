@@ -10,8 +10,9 @@ import {
   UseGuards,
   DefaultValuePipe,
   ParseIntPipe,
+  ParseUUIDPipe
 } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+import { AuthGuard }      from '@nestjs/passport';
 import { PatientsService } from './patients.service';
 import { CreatePatientDto } from './create-patient.dto';
 import { UpdatePatientDto } from './update-patient.dto';
@@ -20,6 +21,12 @@ import { UpdatePatientDto } from './update-patient.dto';
 @Controller('patients')
 export class PatientsController {
   constructor(private readonly svc: PatientsService) {}
+
+  @Get('count')
+  async count(): Promise<{ count: number }> {
+    const count = await this.svc.count();
+    return { count };
+  }
 
   @Get()
   async findAll(
@@ -41,25 +48,25 @@ export class PatientsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id', ParseUUIDPipe) id: string) {
     return this.svc.findOne(id);
   }
 
   @Post()
-  create(@Body() dto: CreatePatientDto) {
+  async create(@Body() dto: CreatePatientDto) {
     return this.svc.create(dto);
   }
 
   @Put(':id')
-  update(
-    @Param('id') id: string,
+  async update(
+    @Param('id', ParseUUIDPipe) id: string,
     @Body() dto: UpdatePatientDto,
   ) {
     return this.svc.update(id, dto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id', ParseUUIDPipe) id: string) {
     return this.svc.remove(id);
   }
 }

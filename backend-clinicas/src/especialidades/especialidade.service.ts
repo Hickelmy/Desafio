@@ -2,8 +2,8 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Especialidade } from './especialidade.entity';
-import { CreateEspecialidadeDto } from 'src/dto/create-especialidade.dto';
-import { UpdateEspecialidadeDto } from 'src/dto/update-especialidade.dto';
+import { CreateEspecialidadeDto } from 'src/dto/specialty/create-especialidade.dto';
+import { UpdateEspecialidadeDto } from 'src/dto/specialty/update-especialidade.dto';
 
 
 @Injectable()

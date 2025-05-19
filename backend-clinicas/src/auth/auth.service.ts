@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
 
 import { User } from '../users/user.entity';
-import { RegisterDto } from 'src/dto/register.dto';
+import { RegisterDto } from 'src/dto/login/register.dto';
 
 @Injectable()
 export class AuthService {

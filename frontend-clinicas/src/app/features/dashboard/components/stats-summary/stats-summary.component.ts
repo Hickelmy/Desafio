@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
+// src/app/features/dashboard/components/stats-summary.component.ts
+
+import { Component, OnInit } from '@angular/core';
+import { CommonModule }      from '@angular/common';
+import { MatCardModule }     from '@angular/material/card';
+import { MatIconModule }     from '@angular/material/icon';
+import { Observable }        from 'rxjs';
+import { Stat, StatsService } from './service/stats.service';
 
 @Component({
   standalone: true,
@@ -10,25 +14,12 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrls: ['./stats-summary.component.scss'],
   imports: [CommonModule, MatCardModule, MatIconModule]
 })
-export class StatsSummaryComponent {
-  stats = [
-    {
-      icon: 'groups',
-      label: 'Total Patients',
-      value: 1280,
-      color: '#0ea5e9'
-    },
-    {
-      icon: 'event',
-      label: 'Appointments',
-      value: 456,
-      color: '#10b981'
-    },
-    {
-      icon: 'bar_chart',
-      label: 'Avg / Patient',
-      value: 3.5,
-      color: '#f59e0b'
-    }
-  ];
+export class StatsSummaryComponent implements OnInit {
+  stats$!: Observable<Stat[]>;
+
+  constructor(private statsService: StatsService) {}
+
+  ngOnInit(): void {
+    this.stats$ = this.statsService.getStats();
+  }
 }

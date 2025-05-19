@@ -31,8 +31,8 @@ import {
 } from 'rxjs/operators';
 import { Store } from '@ngxs/store';
 
-import { LoadClinicas } from '../../../state/clinica.actions';
-import { ClinicasState } from '../../../state/clinica.state';
+import { LoadClinicas } from '../state/clinica.actions';
+import { ClinicasState } from '../state/clinica.state';
 
 import { ModalFormularioComponent } from '../components/modal-create/modal-formulario.component';
 import { ModalVisualizarComponent } from '../components/modal-view/modal-visualizar.component';

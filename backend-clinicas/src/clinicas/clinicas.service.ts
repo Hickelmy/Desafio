@@ -8,10 +8,10 @@ import { Repository, Like, In } from 'typeorm';
 
 import { Clinica } from './clinica.entity';
 import { Especialidade } from 'src/especialidades/especialidade.entity';
-import { CreateClinicaDto } from 'src/dto/create-clinica.dto';
-import { UpdateClinicaDto } from 'src/dto/update-clinica.dto';
 import { PaginationDto } from 'src/dto/pagination.dto';
 import { PaginatedResult } from 'src/dto/paginated-result.interface';
+import { CreateClinicaDto } from 'src/dto/clinic/create-clinica.dto';
+import { UpdateClinicaDto } from 'src/dto/clinic/update-clinica.dto';
 
 @Injectable()
 export class ClinicasService {
@@ -128,4 +128,10 @@ export class ClinicasService {
 
     return encontrados;
   }
+
+
+   async count(): Promise<number> {
+    return this.especialidadeRepository.count();
+  }
+
 }

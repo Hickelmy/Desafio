@@ -1,4 +1,4 @@
-import { Clinica } from '../models/clinica.model';
+import { Clinica } from '../../../models/clinica.model';
 
 export class CreateClinica {
   static readonly type = '[Clinica] Create';

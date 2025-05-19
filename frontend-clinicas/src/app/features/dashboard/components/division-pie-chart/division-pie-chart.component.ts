@@ -12,10 +12,10 @@ import { MatCardModule } from '@angular/material/card';
 })
 export class DivisionPieChartComponent implements OnInit {
   data = [
-    { name: 'Cardiology', value: 30 },
-    { name: 'Neurology', value: 25 },
-    { name: 'Orthopedics', value: 20 },
-    { name: 'Pediatrics', value: 25 }
+    { name: 'Cardiologia', value: 30 },
+    { name: 'Neurologia', value: 25 },
+    { name: 'Ortopedia', value: 20 },
+    { name: 'Pediatria', value: 25 }
   ];
 
   colorScheme: Color = {

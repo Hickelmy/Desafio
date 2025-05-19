@@ -1,6 +1,6 @@
-<mat-card class="doctor-card">
+<mat-card class="doctor-card" *ngIf="doctor$ | async as doctor">
   <div class="header">
-    <h3>Doctor of the Month</h3>
+    <h3>Doutor do Mês</h3>
   </div>
 
   <div class="content">
@@ -9,11 +9,11 @@
     <div class="info">
       <h4>{{ doctor.name }}</h4>
       <p>{{ doctor.specialization }}</p>
-      <span>{{ doctor.appointments }} Appointments</span>
+      <span>{{ doctor.appointments }} Compromissos</span>
     </div>
   </div>
 
   <div class="actions">
-    <button mat-raised-button color="primary">View Profile</button>
+    <button mat-raised-button color="primary">Visualizar Perfil</button>
   </div>
 </mat-card>

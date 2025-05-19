@@ -11,7 +11,7 @@ import { tap, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 import { LoadClinicas, SetFiltroClinicas } from './clinica.actions';
-import { Clinica } from '../models/clinica.model';
+import { Clinica } from '../../../models/clinica.model';
 
 export interface ClinicasStateModel {
   clinicas: Clinica[];

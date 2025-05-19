@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common';
 import { EspecialidadeService } from './especialidade.service';
-import { CreateEspecialidadeDto } from 'src/dto/create-especialidade.dto';
-import { UpdateEspecialidadeDto } from 'src/dto/update-especialidade.dto';
+import { CreateEspecialidadeDto } from 'src/dto/specialty/create-especialidade.dto';
+import { UpdateEspecialidadeDto } from 'src/dto/specialty/update-especialidade.dto';
 
 
 @Controller('especialidades')

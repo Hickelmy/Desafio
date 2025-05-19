@@ -14,32 +14,32 @@ export class AppointmentsListComponent {
   appointments = [
     {
       patient: {
-        name: 'User A ',
-        phone: '+55 97787478984',
+        name: 'Joana Silva',
+        phone: '+55 11 97787-4984',
         avatar: 'https://randomuser.me/api/portraits/women/1.jpg',
         color: '#f87171'
       },
-      date: '5 Dec 2019',
-      time: '4:30 PM',
+      date: '05 dez 2019',
+      time: '16:30',
       doctor: {
-        name: 'User B',
-        specialization: 'Cardiologist',
+        name: 'Dr. Paulo Costa',
+        specialization: 'Cardiologista',
         avatar: 'https://randomuser.me/api/portraits/men/1.jpg'
       }
     },
     {
       patient: {
-        name: 'User C',
-        phone: '+55 97787478984',
+        name: 'Carlos Pereira',
+        phone: '+55 21 98876-5432',
         avatar: 'https://randomuser.me/api/portraits/men/2.jpg',
         color: '#60a5fa'
       },
-      date: '5 Dec 2019',
-      time: '1:30 PM',
+      date: '05 dez 2019',
+      time: '13:30',
       doctor: {
-        name: 'User D',
-        specialization: 'Orthopedics',
-        avatar: 'https://randomuser.me/api/portraits/men/3.jpg'
+        name: 'Dra. Mariana Lopes',
+        specialization: 'Ortopedia',
+        avatar: 'https://randomuser.me/api/portraits/women/3.jpg'
       }
     }
   ];

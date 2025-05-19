@@ -1,0 +1,44 @@
+<h2 mat-dialog-title>
+  {{ mode === 'criar' ? 'Novo Médico' : 'Editar Médico' }}
+</h2>
+<form [formGroup]="form" mat-dialog-content>
+  <mat-form-field appearance="outline">
+    <mat-label>Nome</mat-label>
+    <input matInput formControlName="name" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>CRM</mat-label>
+    <input matInput formControlName="crm" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Especialidade</mat-label>
+    <input matInput formControlName="specialty" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Telefone</mat-label>
+    <input matInput formControlName="phone" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>E-mail</mat-label>
+    <input matInput formControlName="email" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Status</mat-label>
+    <mat-select formControlName="status">
+      <mat-option value="Ativo">Ativo</mat-option>
+      <mat-option value="Inativo">Inativo</mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancelar()">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="salvar()">
+    {{ mode === 'criar' ? 'Criar' : 'Salvar' }}
+  </button>
+</mat-dialog-actions>

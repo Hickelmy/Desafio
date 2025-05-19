@@ -38,6 +38,11 @@ export const routes: Routes = [
           import('./features/patients/patients.component').then(m => m.PatientsComponent)
       },
       {
+        path: 'doctor',
+        loadComponent: () =>
+          import('./features/doctor/listagem-medicos.component').then(m => m.ListagemMedicosComponent)
+      },
+      {
         path: 'todo',
         loadComponent: () =>
           import('./features/todo/todo.component').then(m => m.TodoComponent)
@@ -63,7 +68,7 @@ export const routes: Routes = [
           }
         ]
       },
-
+      
       {
         path: 'clinicas',
         children: [

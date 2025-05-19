@@ -6,8 +6,8 @@ import {
   UnauthorizedException
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { LoginDto } from 'src/dto/login.dto';
-import { RegisterDto } from 'src/dto/register.dto';
+import { LoginDto } from 'src/dto/login/login.dto';
+import { RegisterDto } from 'src/dto/login/register.dto';
 
 @Controller('auth')
 export class AuthController {
