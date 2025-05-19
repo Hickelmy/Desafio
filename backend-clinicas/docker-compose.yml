@@ -21,7 +21,7 @@ services:
       dockerfile: Dockerfile
     container_name: clinicas_api
     ports:
-      - "4200:4200"
+      - "3000:3000"
     environment:
       DATABASE_URL: postgres://postgres:postgres@db:5432/clinicas
     depends_on:
