@@ -50,7 +50,7 @@ docker compose up -d --build
 
 ---
 
-## 🧪 Scripts úteis
+## 🧪 Rodar Localmente
 
 ### Frontend
 ```bash
@@ -122,24 +122,12 @@ npm run start:dev
 
 ---
 
-## 🖼 Mockups
-
-- Acesse os mockups das telas no [Excalidraw](https://excalidraw.com/)
-- Importe o arquivo `embed_scente_amorsaude_front.excalidraw (2).svg` para visualizar
-
----
-
 ## 📚 Boas práticas esperadas
 
 - Gerenciamento de estado imutável com NGXS/NGRX
-- ChangeDetection `OnPush` para melhor performance
+- ChangeDetection `OnPush`
 - Sem lógica diretamente nos templates
 - Lazy loading de módulos
-- Código limpo, tipado e bem comentado
+- Código limpo, tipado
 
 ---
-
-## 🧙 Dica final
-
-> No fim do dia, você estará escrevendo código para outros devs.  
-> Deixe a mágica para o Merlin, e evite variáveis como `x`, `y`, `z` 😄
