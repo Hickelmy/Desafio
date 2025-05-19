@@ -1,88 +1,104 @@
-<div class="header">
-  <h2>Patients List</h2>
-  <div class="header-actions">
-    <button mat-stroked-button color="primary"><mat-icon>upload</mat-icon> Import</button>
-    <button mat-raised-button color="primary"><mat-icon>add</mat-icon> New Patient</button>
+<ng-container *ngIf="!(loading$ | async); else loadingTpl">
+  <div class="header">
+    <h2>Patients List</h2>
+    <div class="header-actions">
+      <button mat-icon-button (click)="toggleDarkMode()">
+        <mat-icon>{{ darkMode ? 'light_mode' : 'dark_mode' }}</mat-icon>
+      </button>
+      <button mat-raised-button color="primary" (click)="newPatient()">
+        <mat-icon>add</mat-icon> New Patient
+      </button>
+    </div>
   </div>
-</div>
 
-<div class="filter-bar">
-  <button mat-button>All</button>
-  <button mat-button color="primary">Active</button>
-  <button mat-button>Inactive</button>
+  <div class="filter-bar">
+    <ng-container *ngIf="filter$ | async as f">
+      <button mat-button (click)="filterStatus('All')"    [color]="f==='All'?    'primary':undefined">All</button>
+      <button mat-button (click)="filterStatus('Active')" [color]="f==='Active'? 'primary':undefined">Active</button>
+      <button mat-button (click)="filterStatus('Inactive')" [color]="f==='Inactive'? 'primary':undefined">Inactive</button>
+    </ng-container>
+    <span class="spacer"></span>
+    <mat-form-field appearance="outline" class="search">
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput placeholder="Search by name, phone, email..." (input)="onSearch($any($event.target).value)" />
+    </mat-form-field>
+  </div>
 
-  <span class="spacer"></span>
+  <ng-container *ngIf="rows$ | async as rows">
+    <div [class.dark-mode]="darkMode">
+      <table mat-table [dataSource]="rows" class="mat-elevation-z1 responsive-table" *ngIf="rows.length; else noDataTpl">
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let r"><mat-checkbox></mat-checkbox></td>
+        </ng-container>
 
-  <mat-form-field appearance="outline" class="search">
-    <mat-label>Search</mat-label>
-    <input matInput placeholder="Search by name, phone, email..." />
-  </mat-form-field>
+        <ng-container matColumnDef="patient">
+          <th mat-header-cell *matHeaderCellDef>Patient</th>
+          <td mat-cell *matCellDef="let r; let i = index">
+            <div class="patient-info">
+              <img [src]="getAvatar(r.avatarUrl, i)" alt="avatar" />
+              <div><strong>{{ r.name }}</strong><div class="sub">P{{ r.id }}</div></div>
+            </div>
+          </td>
+        </ng-container>
 
-  <button mat-icon-button><mat-icon>filter_list</mat-icon></button>
-</div>
+        <ng-container matColumnDef="contact">
+          <th mat-header-cell *matHeaderCellDef>Contact</th>
+          <td mat-cell *matCellDef="let r"><div>{{ r.phone }}</div><div class="sub">{{ r.email }}</div></td>
+        </ng-container>
 
-<mat-table [dataSource]="patients" class="mat-elevation-z1">
+        <ng-container matColumnDef="birth">
+          <th mat-header-cell *matHeaderCellDef>DOB</th>
+          <td mat-cell *matCellDef="let r">{{ r.dob | date:'mediumDate' }}</td>
+        </ng-container>
 
-  <ng-container matColumnDef="select">
-    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-    <mat-cell *matCellDef="let p">
-      <input type="checkbox" />
-    </mat-cell>
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let r">
+            <mat-chip [color]="getStatusColor(r.status)" selected>{{ r.status }}</mat-chip>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="doctor">
+          <th mat-header-cell *matHeaderCellDef>Doctor</th>
+          <td mat-cell *matCellDef="let r">{{ r.doctor }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="lastVisit">
+          <th mat-header-cell *matHeaderCellDef>Last Visit</th>
+          <td mat-cell *matCellDef="let r">{{ r.lastVisit | date:'mediumDate' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let r">
+            <button mat-icon-button (click)="editPatient(r)"><mat-icon>edit</mat-icon></button>
+            <button mat-icon-button color="warn" (click)="deletePatient(r.id)"><mat-icon>delete</mat-icon></button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator
+        [length]="total$ | async"
+        [pageSize]="pageSize$ | async"
+        [pageIndex]="pageIndex$ | async"
+        [pageSizeOptions]="[5, 10, 25]"
+        showFirstLastButtons
+        (page)="onPageChange($event)"
+      ></mat-paginator>
+    </div>
   </ng-container>
+</ng-container>
 
-  <ng-container matColumnDef="patient">
-    <mat-header-cell *matHeaderCellDef>Patient name</mat-header-cell>
-    <mat-cell *matCellDef="let p; let i = index">
-      <div class="patient-info">
-        <img [src]="getAvatar(p.avatar, i)" alt="avatar" />
-        <div>
-          <strong>{{ p.name }}</strong>
-          <div class="sub">P{{ (i + 1).toString().padStart(4, '0') }}</div>
-        </div>
-      </div>
-    </mat-cell>
-  </ng-container>
+<ng-template #loadingTpl>
+  <div class="loading-container">
+    <mat-progress-spinner diameter="40"></mat-progress-spinner>
+  </div>
+</ng-template>
 
-  <ng-container matColumnDef="contact">
-    <mat-header-cell *matHeaderCellDef>Contact details</mat-header-cell>
-    <mat-cell *matCellDef="let p">
-      <div>{{ p.phone }}</div>
-      <div class="sub">{{ p.email }}</div>
-    </mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="birth">
-    <mat-header-cell *matHeaderCellDef>Date of Birth</mat-header-cell>
-    <mat-cell *matCellDef="let p">
-      {{ p.dob | date:'mediumDate' }}
-    </mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="status">
-    <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
-    <mat-cell *matCellDef="let p">
-      <mat-chip [color]="getStatusColor(p.status)" selected>{{ p.status }}</mat-chip>
-    </mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="doctor">
-    <mat-header-cell *matHeaderCellDef>Doctor Assigned</mat-header-cell>
-    <mat-cell *matCellDef="let p">{{ p.doctor }}</mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="lastVisit">
-    <mat-header-cell *matHeaderCellDef>Last Visit</mat-header-cell>
-    <mat-cell *matCellDef="let p">{{ p.lastVisit | date:'mediumDate' }}</mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="actions">
-    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-    <mat-cell *matCellDef="let p">
-      <button mat-icon-button><mat-icon>more_vert</mat-icon></button>
-    </mat-cell>
-  </ng-container>
-
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-
-</mat-table>
+<ng-template #noDataTpl>
+  <p class="no-data">No patients found.</p>
+</ng-template>

@@ -1,16 +1,24 @@
-<section class="todo-header">
+<div class="faixa-construcao" style="display: flex; align-items: center; justify-content: center; background: #f5f5f5; padding: 1rem;">
+  <img
+    src="pagina_em.png"
+    alt="Página em construção"
+    style="height: 200px; margin-right: 1rem;"
+  />
+  <h1 style="margin: 0; font-size: 1.5rem;">Página em construção</h1>
+</div>
+
+<section class="todo-header"> 
   <div class="header-content">
     <div>
-      <h2>Clinical Schedule</h2>
+      <h2>Agenda Clínica</h2>
       <p>
-        View patient-related activities like medications, emergencies, diagnostics,
-        and appointments.
+        Visualize atividades relacionadas aos pacientes, como medicações, emergências, diagnósticos e agendamentos.
       </p>
     </div>
 
     <button mat-stroked-button>
       <mat-icon>cloud_download</mat-icon>
-      Export
+      Exportar
     </button>
   </div>
 </section>
@@ -19,11 +27,10 @@
   <full-calendar [options]="calendarOptions"></full-calendar>
 </section>
 
-<!-- Painel lateral de detalhes -->
 <aside class="event-sidepanel" *ngIf="selectedEvent">
   <header>
     <h3>{{ selectedEvent.title }}</h3>
-    <button mat-icon-button (click)="selectedEvent = null" aria-label="Close">
+    <button mat-icon-button (click)="selectedEvent = null" aria-label="Fechar">
       <mat-icon>close</mat-icon>
     </button>
   </header>
@@ -31,19 +38,25 @@
   <div class="avatar-wrapper">
     <img
       class="avatar"
-      [src]="selectedEvent.extendedProps?.avatar || 'https://i.pravatar.cc/100?u=' + selectedEvent.title"
-      alt="avatar"
+      [src]="
+        selectedEvent.extendedProps?.avatar ||
+        'https://i.pravatar.cc/100?u=' + selectedEvent.title
+      "
+      alt="Avatar do paciente"
     />
   </div>
 
   <section class="event-info">
-    <p><strong>Type:</strong> {{ selectedEvent.extendedProps?.type?.toUpperCase() }}</p>
-    <p><strong>Time:</strong> {{ selectedEvent.start | date: 'shortTime' }}
-      <span *ngIf="selectedEvent.end"> - {{ selectedEvent.end | date: 'shortTime' }}</span>
+    <p><strong>Tipo:</strong> {{ selectedEvent.extendedProps?.type?.toUpperCase() }}</p>
+    <p>
+      <strong>Horário:</strong> {{ selectedEvent.start | date: 'shortTime' }}
+      <span *ngIf="selectedEvent.end">
+        – {{ selectedEvent.end | date: 'shortTime' }}
+      </span>
     </p>
 
     <div class="notes">
-      <h4>Instructions</h4>
+      <h4>Instruções</h4>
       <p>{{ selectedEvent.extendedProps?.notes }}</p>
     </div>
   </section>

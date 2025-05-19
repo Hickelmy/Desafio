@@ -12,6 +12,8 @@ import { PaginatedResult } from '../../../models/paginated-result';
   providedIn: 'root',
 })
 export class ClinicaService {
+  // private readonly baseUrl = `${environment.apiUrl}`;
+
   private readonly apiUrl = 'http://localhost:3000';
 
   constructor(private readonly http: HttpClient) {}

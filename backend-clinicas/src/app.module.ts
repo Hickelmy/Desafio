@@ -7,6 +7,7 @@ import { UsersModule } from './users/users.module';
 import { ClinicasModule } from './clinicas/clinicas.module';
 import { SeedModule } from './seed/seed.module';
 import { EspecialidadeModule } from './especialidades/especialidade.module';
+import { PatientsModule } from './patients/patients.module';
 
 @Module({
   imports: [
@@ -29,7 +30,8 @@ import { EspecialidadeModule } from './especialidades/especialidade.module';
     UsersModule,
     ClinicasModule,
     EspecialidadeModule,
-    SeedModule
+    SeedModule,
+    PatientsModule
   ],
 })
 export class AppModule {}

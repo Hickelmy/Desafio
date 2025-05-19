@@ -10,15 +10,15 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
-type EventType = 'medication' | 'emergency' | 'appointment' | 'diagnosis' | 'MCU';
+type TipoEvento = 'medicação' | 'emergência' | 'consulta' | 'diagnóstico' | 'MCU';
 
-interface NurseEvent {
+interface EventoEnfermagem {
   title: string;
   start: string;
   end?: string;
   color: string;
   extendedProps: {
-    type: EventType;
+    type: TipoEvento;
     notes: string;
     avatar?: string;
   };
@@ -40,67 +40,67 @@ interface NurseEvent {
 export class TodoComponent {
   selectedEvent: any = null;
 
-  private nurseEvents: NurseEvent[] = [
+  private eventosEnfermagem: EventoEnfermagem[] = [
     {
       title: 'Carlos Lima',
       start: '2025-05-16T09:00:00',
-      end: '2025-05-16T09:30:00',
+      end:   '2025-05-16T09:30:00',
       color: '#26a69a',
       extendedProps: {
-        type: 'medication',
-        notes: 'Apply insulin dose and record sugar level.',
+        type: 'medicação',
+        notes: 'Aplicar dose de insulina e registrar nível de glicose.',
         avatar: 'https://i.pravatar.cc/150?img=3'
       }
     },
     {
       title: 'Joana Reis',
       start: '2025-05-17T10:00:00',
-      end: '2025-05-17T10:45:00',
+      end:   '2025-05-17T10:45:00',
       color: '#e53935',
       extendedProps: {
-        type: 'emergency',
-        notes: 'Shortness of breath. Prepare for potential oxygen support.',
+        type: 'emergência',
+        notes: 'Falta de ar. Preparar suporte de oxigênio se necessário.',
         avatar: 'https://i.pravatar.cc/150?img=7'
       }
     },
     {
       title: 'Ana Paula',
       start: '2025-05-18T14:00:00',
-      end: '2025-05-18T14:30:00',
+      end:   '2025-05-18T14:30:00',
       color: '#3949ab',
       extendedProps: {
-        type: 'appointment',
-        notes: 'Routine checkup. Take vitals and update patient chart.',
+        type: 'consulta',
+        notes: 'Check-up de rotina. Medir sinais vitais e atualizar prontuário.',
         avatar: 'https://i.pravatar.cc/150?img=8'
       }
     },
     {
       title: 'Annette Black',
       start: '2025-05-19T09:00:00',
-      end: '2025-05-19T10:00:00',
+      end:   '2025-05-19T10:00:00',
       color: '#dcedc8',
       extendedProps: {
         type: 'MCU',
-        notes: 'Monitor vitals and supervise medication intake.',
+        notes: 'Monitorar sinais vitais e supervisionar a administração de medicamentos.',
         avatar: 'https://i.pravatar.cc/150?img=5'
       }
     }
   ];
 
   calendarOptions: CalendarOptions = {
-    plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-    initialView: 'dayGridMonth',
+    plugins:       [dayGridPlugin, timeGridPlugin, interactionPlugin],
+    initialView:   'dayGridMonth',
     headerToolbar: {
-      left: 'prev,next today',
+      left:   'prev,next today',
       center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay'
+      right:  'dayGridMonth,timeGridWeek,timeGridDay'
     },
-    events: this.nurseEvents,
-    editable: false,
-    selectable: true,
-    nowIndicator: true,
-    slotDuration: '00:30:00',
-    eventClick: this.handleEventClick.bind(this)
+    events:           this.eventosEnfermagem,
+    editable:         false,
+    selectable:       true,
+    nowIndicator:     true,
+    slotDuration:     '00:30:00',
+    eventClick:       this.handleEventClick.bind(this)
   };
 
   handleEventClick(arg: EventClickArg): void {

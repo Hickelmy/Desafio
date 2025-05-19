@@ -4,7 +4,6 @@
 
 <form [formGroup]="form" class="formulario" (ngSubmit)="salvarModal()">
 
-  <!-- Razão Social -->
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>Razão Social</mat-label>
     <input matInput formControlName="razaoSocial" />
@@ -13,7 +12,6 @@
     </mat-error>
   </mat-form-field>
 
-  <!-- Nome Fantasia -->
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>Nome Fantasia</mat-label>
     <input matInput formControlName="nomeFantasia" />
@@ -22,7 +20,6 @@
     </mat-error>
   </mat-form-field>
 
-  <!-- CNPJ -->
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>CNPJ</mat-label>
     <input
@@ -42,7 +39,6 @@
     </mat-error>
   </mat-form-field>
 
-  <!-- Regional -->
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>Regional</mat-label>
     <mat-select formControlName="regional">
@@ -55,7 +51,6 @@
     </mat-error>
   </mat-form-field>
 
-  <!-- Data de Inauguração -->
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>Data e Hora de Inauguração</mat-label>
     <input
@@ -78,10 +73,8 @@
     </mat-error>
   </mat-form-field>
 
-  <!-- Checkbox Ativa -->
   <mat-checkbox formControlName="ativa">Ativa</mat-checkbox>
 
-  <!-- Especialidades -->
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>Especialidades</mat-label>
     <mat-select formControlName="especialidades" multiple>
@@ -95,7 +88,6 @@
     </mat-error>
   </mat-form-field>
 
-  <!-- Botões -->
   <div class="botoes">
     <button mat-button type="button" (click)="fecharModal()">Cancelar</button>
     <button mat-flat-button color="primary" type="submit">Salvar</button>

@@ -47,16 +47,86 @@
   }
 }
 
-mat-table {
-  width: 100%;
+.mat-table,  
+.mat-mdc-paginator {
+  transition: background-color 0.3s, color 0.3s;
+}
 
-  mat-header-cell, mat-cell {
-    padding: 1rem;
-    vertical-align: middle;
+/* Light mode */
+.patients-container {
+  .mat-table {
+    background: #fff;
+    color: #000;
+
+    .mat-header-cell {
+      font-weight: 600;
+      color: #444;
+      background: #f5f5f5;
+    }
+
+    .mat-cell {
+      color: #000;
+    }
   }
 
-  mat-header-cell {
-    font-weight: 600;
-    color: #444;
+  .mat-mdc-paginator {
+    background: #fafafa;
+    color: #000;
+
+    .mat-mdc-paginator-range-label,
+    .mat-mdc-icon-button {
+      color: #000;
+    }
+  }
+}
+
+/* Dark mode */
+.patients-container.dark-mode {
+  .mat-table {
+    background: #424242;
+    color: #eee;
+
+    .mat-header-cell {
+      background: #616161;
+      color: #fff;
+    }
+
+    .mat-row:nth-child(even) {
+      background: #383838;
+    }
+    .mat-row:nth-child(odd) {
+      background: #424242;
+    }
+
+    .mat-cell {
+      color: #eee;
+    }
+  }
+
+  .mat-mdc-paginator {
+    background: #424242;
+    color: #eee;
+
+    .mat-mdc-paginator-range-label,
+    .mat-mdc-icon-button {
+      color: #eee;
+    }
+
+    mat-form-field {
+      .mat-mdc-text-field-wrapper {
+        .mdc-notched-outline {
+          &__leading,
+          &__notch,
+          &__trailing {
+            border-color: #eee;
+          }
+        }
+      }
+
+      .mat-mdc-select-value-text,
+      .mat-mdc-select-arrow svg path {
+        fill: #eee;
+      }
+    }
   }
 }
