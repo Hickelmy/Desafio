@@ -61,7 +61,7 @@ ng serve
 
 ### Backend
 ```bash
-cd backend
+cd backend-clinicas
 npm install
 npm run start:dev
 ```
@@ -118,7 +118,7 @@ npm run start:dev
 - DTOs para validação e filtro
 - Erros tratados com interceptadores
 - Login com JWT + Refresh Token
-- Docker com banco embutido (Postgres ou SQLite)
+- Docker com banco embutido (Postgres)
 
 ---
 
