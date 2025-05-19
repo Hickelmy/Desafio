@@ -1,0 +1,74 @@
+<div class="header">
+  <h2>Agendamentos de Hoje</h2>
+  <button mat-flat-button color="primary" (click)="openCreateDialog()">
+    <mat-icon>add</mat-icon>
+    Novo Agendamento
+  </button>
+</div>
+
+<!-- Tabela de Agendamentos -->
+<ng-container *ngIf="dataSource && dataSource.data && dataSource.data.length > 0; else semAgendamentos">
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z1">
+
+    <!-- Horário -->
+    <ng-container matColumnDef="time">
+      <mat-header-cell *matHeaderCellDef>Horário</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.time }}</mat-cell>
+    </ng-container>
+
+    <!-- Paciente -->
+    <ng-container matColumnDef="patient">
+      <mat-header-cell *matHeaderCellDef>Paciente</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.patient }}</mat-cell>
+    </ng-container>
+
+    <!-- Motivo -->
+    <ng-container matColumnDef="reason">
+      <mat-header-cell *matHeaderCellDef>Motivo</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.reason }}</mat-cell>
+    </ng-container>
+
+    <!-- Doutor -->
+    <ng-container matColumnDef="doctor">
+      <mat-header-cell *matHeaderCellDef>Profissional</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.doctor }}</mat-cell>
+    </ng-container>
+
+    <!-- Status -->
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-chip [color]="getStatusColor(element.status)" selected>
+          {{ element.status }}
+        </mat-chip>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Ações -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>Ações</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-icon-button color="primary" aria-label="Ver detalhes">
+          <mat-icon>visibility</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Renderização -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</ng-container>
+
+<!-- Caso não haja nenhum agendamento -->
+<ng-template #semAgendamentos>
+  <p class="nenhum">Nenhum agendamento encontrado.</p>
+</ng-template>
+
+<!-- Paginação -->
+<mat-paginator
+  [pageSize]="5"
+  [pageSizeOptions]="[5, 10, 25]"
+  showFirstLastButtons
+>
+</mat-paginator>

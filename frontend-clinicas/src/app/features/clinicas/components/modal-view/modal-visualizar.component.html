@@ -1,0 +1,41 @@
+<div class="modal-content">
+  <header class="modal-header">
+    <h2 class="modal-title">
+      {{ clinica.nomeFantasia || clinica.razaoSocial }}
+    </h2>
+    <button
+      mat-icon-button
+      (click)="fecharModal()"
+      class="close-button"
+      aria-label="Fechar modal"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </header>
+
+  <section class="info-section">
+    <dl>
+      <ng-container *ngFor="let campo of camposPrincipais">
+        <div class="info-row">
+          <dt>{{ campo.label }}</dt>
+          <dd>{{ campo.valor }}</dd>
+        </div>
+      </ng-container>
+    </dl>
+  </section>
+
+  <section class="especialidades-section">
+    <h3>Especialidades</h3>
+    <ng-container *ngIf="clinica.especialidades?.length; else vazio">
+    <div class="especialidades-lista">
+  <span class="chip" *ngFor="let esp of clinica.especialidades">
+    {{ esp.nome }}
+  </span>
+</div>
+
+    </ng-container>
+    <ng-template #vazio>
+      <p class="sem-especialidades">Nenhuma especialidade cadastrada.</p>
+    </ng-template>
+  </section>
+</div>

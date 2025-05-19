@@ -1,0 +1,55 @@
+<aside class="sidebar">
+  <div class="logo">
+    <img src="logo.png" alt="Logo" />
+</div>
+
+
+  <nav class="nav-links">
+    <a routerLink="/dashboard" routerLinkActive="active">
+      <mat-icon>home</mat-icon>
+      <span>Overview</span>
+    </a>
+
+    <a routerLink="/schedule" routerLinkActive="active">
+      <mat-icon>calendar_month</mat-icon>
+      <span>Agendamento</span>
+    </a>
+
+    <a routerLink="/clinicas" routerLinkActive="active">
+      <mat-icon>local_hospital</mat-icon>
+      <span>Clínicas</span>
+    </a>
+
+    <a routerLink="/patients" routerLinkActive="active" >
+      <mat-icon>people</mat-icon>
+      <span>Pacientes</span>
+    </a>
+
+    <a routerLink="/todo" routerLinkActive="active">
+      <mat-icon>check_circle</mat-icon>
+      <span>To-Do</span>
+    </a>
+
+    <a routerLink="/imaging" routerLinkActive="active">
+      <mat-icon>image</mat-icon>
+      <span>
+        Imaging
+        <span class="dot"></span>
+      </span>
+    </a>
+
+    <a routerLink="/cme" routerLinkActive="active">
+      <mat-icon>tablet_mac</mat-icon>
+      <span>CME</span>
+    </a>
+  </nav>
+
+  <mat-divider></mat-divider>
+
+<div class="bottom-settings">
+  <a (click)="toggleTheme()">
+    <mat-icon>{{ isDark() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+    <span>{{ isDark() ? 'Light Mode' : 'Dark Mode' }}</span>
+  </a>
+</div>
+</aside>

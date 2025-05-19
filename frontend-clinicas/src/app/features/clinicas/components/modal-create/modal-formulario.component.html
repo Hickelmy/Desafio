@@ -1,0 +1,103 @@
+<h2 mat-dialog-title>
+  {{ clinica ? 'Editar Clínica' : 'Nova Clínica' }}
+</h2>
+
+<form [formGroup]="form" class="formulario" (ngSubmit)="salvarModal()">
+
+  <!-- Razão Social -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Razão Social</mat-label>
+    <input matInput formControlName="razaoSocial" />
+    <mat-error *ngIf="form.get('razaoSocial')?.hasError('required')">
+      Campo obrigatório
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Nome Fantasia -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Nome Fantasia</mat-label>
+    <input matInput formControlName="nomeFantasia" />
+    <mat-error *ngIf="form.get('nomeFantasia')?.hasError('required')">
+      Campo obrigatório
+    </mat-error>
+  </mat-form-field>
+
+  <!-- CNPJ -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>CNPJ</mat-label>
+    <input
+      matInput
+      formControlName="cnpj"
+      mask="00.000.000/0000-00"
+      placeholder="00.000.000/0000-00"
+    />
+    <mat-error *ngIf="form.get('cnpj')?.hasError('required')">
+      Campo obrigatório
+    </mat-error>
+    <mat-error *ngIf="form.get('cnpj')?.hasError('invalidCnpj')">
+      CNPJ inválido
+    </mat-error>
+    <mat-error *ngIf="form.get('cnpj')?.hasError('jaExiste')">
+      Este CNPJ já está cadastrado
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Regional -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Regional</mat-label>
+    <mat-select formControlName="regional">
+      <mat-option *ngFor="let r of regionais" [value]="r">
+        {{ r }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="form.get('regional')?.hasError('required')">
+      Campo obrigatório
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Data de Inauguração -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Data e Hora de Inauguração</mat-label>
+    <input
+      matInput
+      type="datetime-local"
+      formControlName="dataInauguracao"
+      [min]="minDataHora"
+      (keydown)="bloquearDigitacao($event)"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="abrirCampoDataHora()"
+      aria-label="Abrir seletor de data e hora"
+    >
+      <mat-icon>calendar_today</mat-icon>
+    </button>
+    <mat-error *ngIf="form.get('dataInauguracao')?.hasError('required')">
+      Campo obrigatório
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Checkbox Ativa -->
+  <mat-checkbox formControlName="ativa">Ativa</mat-checkbox>
+
+  <!-- Especialidades -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Especialidades</mat-label>
+    <mat-select formControlName="especialidades" multiple>
+      <mat-option *ngFor="let esp of especialidades" [value]="esp.id">
+        {{ esp.nome }}
+      </mat-option>
+    </mat-select>
+    <mat-hint>Selecione pelo menos 5</mat-hint>
+    <mat-error *ngIf="form.get('especialidades')?.hasError('minlength')">
+      Selecione no mínimo 5 especialidades
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Botões -->
+  <div class="botoes">
+    <button mat-button type="button" (click)="fecharModal()">Cancelar</button>
+    <button mat-flat-button color="primary" type="submit">Salvar</button>
+  </div>
+</form>

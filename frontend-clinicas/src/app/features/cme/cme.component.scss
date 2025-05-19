@@ -1,0 +1,22 @@
+h2 {
+  margin-bottom: 2rem;
+}
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+
+  .field {
+    min-width: 250px;
+    flex: 1;
+  }
+}
+
+.table {
+  width: 100%;
+  mat-header-cell, mat-cell {
+    padding: 1rem;
+  }
+}

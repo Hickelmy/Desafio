@@ -1,3 +1,8 @@
 <main>
-  <router-outlet></router-outlet>
+<app-loading-spinner *ngIf="!ready"></app-loading-spinner>
+
+<router-outlet *ngIf="ready"></router-outlet>
+
 </main>
+
+

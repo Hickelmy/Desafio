@@ -1,0 +1,62 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  h2 {
+    margin: 0;
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 1rem;
+  }
+}
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+
+  .spacer {
+    flex: 1;
+  }
+
+  .search {
+    max-width: 300px;
+    flex: 1;
+  }
+}
+
+.patient-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+  }
+
+  .sub {
+    font-size: 0.8rem;
+    color: #666;
+  }
+}
+
+mat-table {
+  width: 100%;
+
+  mat-header-cell, mat-cell {
+    padding: 1rem;
+    vertical-align: middle;
+  }
+
+  mat-header-cell {
+    font-weight: 600;
+    color: #444;
+  }
+}

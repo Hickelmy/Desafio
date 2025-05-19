@@ -5,7 +5,7 @@ import {
   IsBoolean,
   IsArray,
   ArrayMinSize,
-  IsUUID,
+  IsUUID
 } from 'class-validator';
 
 export class CreateClinicaDto {

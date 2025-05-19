@@ -1,0 +1,44 @@
+<h2 mat-dialog-title>Novo Agendamento</h2>
+
+<form [formGroup]="form" (ngSubmit)="submit()" class="dialog-form">
+  <mat-form-field appearance="fill">
+    <mat-label>Nome</mat-label>
+    <input matInput formControlName="patient">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>CPF</mat-label>
+    <input matInput formControlName="cpf">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Data</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Hora</mat-label>
+    <input matInput formControlName="time" placeholder="HH:MM">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Especialidade</mat-label>
+    <mat-select formControlName="specialty">
+      <mat-option *ngFor="let e of ['Clínico', 'Cardiologista', 'Ortopedista']" [value]="e">
+        {{ e }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Médico</mat-label>
+    <input matInput formControlName="doctor">
+  </mat-form-field>
+
+  <div class="dialog-actions">
+    <button mat-button type="button" (click)="close()">Cancelar</button>
+    <button mat-flat-button color="primary" type="submit">Salvar</button>
+  </div>
+</form>

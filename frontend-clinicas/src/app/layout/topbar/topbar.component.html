@@ -1,0 +1,58 @@
+<div class="overlay-logout" *ngIf="loggingOut">
+  <mat-progress-spinner
+    diameter="60"
+    strokeWidth="5"
+    mode="indeterminate"
+    color="primary"
+  ></mat-progress-spinner>
+</div>
+
+<mat-toolbar class="topbar">
+
+  <button
+    *ngIf="isMobile"
+    mat-icon-button
+    class="menu-btn"
+    (click)="toggle.emit()"
+    aria-label="Abrir menu"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <span class="spacer"></span>
+
+  <button
+    mat-icon-button
+    (click)="toggleTheme()"
+    aria-label="Alternar tema"
+  >
+    <mat-icon>
+      {{ (mode$ | async) === 'dark' ? 'light_mode' : 'dark_mode' }}
+    </mat-icon>
+  </button>
+
+  <button
+    mat-button
+    class="profile-btn"
+    [matMenuTriggerFor]="menu"
+    aria-label="Perfil do usuário"
+  >
+  
+    <img
+      class="avatar"
+      [src]="avatar$ | async"
+      alt="Avatar"
+    />
+    <div class="user-info">
+      <span class="user-name">{{ name$ | async }}</span>
+    </div>
+    <mat-icon>expand_more</mat-icon>
+  </button>
+
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Sair</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>

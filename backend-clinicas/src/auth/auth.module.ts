@@ -15,7 +15,7 @@ import { UsersModule } from '../users/users.module';
     TypeOrmModule.forFeature([User]),
     PassportModule,
     JwtModule.register({
-      secret: process.env.JWT_SECRET || 'secret_key', // Substitua por variável segura em produção
+      secret: process.env.JWT_SECRET || 'secret_key',
       signOptions: { expiresIn: '1d' },
     }),
     UsersModule,

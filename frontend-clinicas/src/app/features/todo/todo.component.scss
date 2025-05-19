@@ -1,0 +1,148 @@
+:root {
+  --bg: #ffffff;
+  --text: #1a1a1a;
+  --text-muted: #555;
+  --card: #f4f4f4;
+  --card-shadow: rgba(0, 0, 0, 0.05);
+  --border: #ddd;
+}
+
+[data-theme='dark'] {
+  --bg: #121212;
+  --text: #f5f5f5;
+  --text-muted: #bbb;
+  --card: #1e1e1e;
+  --card-shadow: rgba(0, 0, 0, 0.3);
+  --border: #333;
+}
+
+:host {
+  display: block;
+  background-color: var(--bg);
+  color: var(--text);
+  padding: 1.25rem;
+}
+
+.todo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  h2 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+  }
+}
+
+.calendar-container {
+  background-color: var(--card);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px var(--card-shadow);
+  padding: 1rem;
+}
+
+::ng-deep .fc {
+  background-color: var(--card);
+  color: var(--sidebar-text, #1e1e1e);
+}
+
+::ng-deep .fc-toolbar-title {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+::ng-deep .fc-event {
+  font-size: 0.85rem;
+  border-radius: 6px;
+  padding: 2px 6px;
+  cursor: pointer;
+}
+
+::ng-deep .fc-event-title {
+  font-weight: 600;
+}
+
+::ng-deep .fc-daygrid-day-number,
+::ng-deep .fc-col-header-cell-cushion {
+  color: var(--text);
+}
+
+.event-sidepanel {
+  position: fixed;
+  top: 72px;
+  right: 0;
+  width: 320px;
+  height: calc(100vh - 72px);
+  background-color: var(--sidebar-text, #1e1e1e);
+  color: var(--text);
+  box-shadow: -4px 0 12px var(--card-shadow);
+  border-left: 1px solid var(--border);
+  padding: 1.25rem;
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.2rem;
+
+    h3 {
+      font-size: 1.2rem;
+      margin: 0;
+    }
+
+    button {
+      color: var(--text-muted);
+    }
+  }
+
+  .avatar-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+
+    .avatar {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--border);
+    }
+  }
+
+  .event-info {
+    font-size: 0.9rem;
+    line-height: 1.4;
+
+    p {
+      margin: 0.5rem 0;
+    }
+
+    .notes {
+      margin-top: 1rem;
+
+      h4 {
+        font-size: 0.85rem;
+        margin-bottom: 0.4rem;
+        color: var(--text-muted);
+      }
+
+      p {
+        font-size: 0.85rem;
+        margin: 0;
+        color: var(--text);
+      }
+    }
+  }
+}

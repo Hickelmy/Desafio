@@ -1,0 +1,82 @@
+:host {
+  display: block;
+  padding: 1.5rem;
+  background-color: var(--bg-main);
+  color: var(--sidebar-text);
+}
+
+h2 {
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  color: var(--sidebar-text);
+}
+
+::ng-deep mat-cell,
+::ng-deep mat-header-cell {
+  color: var(--topbar-text) !important;
+}
+
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  h2 {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  button mat-icon {
+    margin-right: 4px;
+  }
+}
+
+
+mat-table {
+  width: 100%;
+  background: var(--topbar-bg);
+  color: var(--topbar-text);
+  border-radius: 6px;
+
+  mat-header-cell, mat-cell {
+    padding: 1rem;
+    border-bottom: 1px solid var(--sidebar-border);
+  }
+
+  mat-header-cell {
+    font-weight: bold;
+  }
+}
+
+mat-chip {
+  font-size: 0.8rem;
+  text-transform: capitalize;
+  color: white;
+
+  &.mat-primary {
+    background-color: #3b82f6;
+  }
+
+  &.mat-accent {
+    background-color: #f59e0b;
+  }
+
+  &.mat-warn {
+    background-color: #ef4444;
+  }
+}
+
+mat-paginator {
+  background-color: var(--topbar-bg);
+  color: var(--topbar-text);
+  border-top: 1px solid var(--sidebar-border);
+
+  ::ng-deep .mat-icon,
+  ::ng-deep .mat-paginator-range-label,
+  ::ng-deep .mat-select-value-text {
+    color: var(--topbar-text);
+  }
+}

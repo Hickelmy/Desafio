@@ -1,0 +1,13 @@
+h2 {
+  margin-bottom: 1.5rem;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.exam-card {
+  cursor: pointer;
+}

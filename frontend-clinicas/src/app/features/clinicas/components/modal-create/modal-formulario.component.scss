@@ -1,0 +1,35 @@
+:host {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  display: block;
+  padding: 1rem;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+
+  mat-form-field,
+  mat-select,
+  .full-width {
+    width: 100%;
+  }
+
+  mat-checkbox {
+    margin-top: -0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .botoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+
+    button {
+      min-width: 100px;
+    }
+  }
+}

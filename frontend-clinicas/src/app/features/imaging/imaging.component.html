@@ -1,0 +1,15 @@
+<h2>Imaging Exams</h2>
+
+<div class="gallery">
+  <mat-card *ngFor="let exam of exams" class="exam-card">
+    <img mat-card-image [src]="exam.image" [alt]="exam.title" />
+    <mat-card-content>
+      <h3>{{ exam.title }}</h3>
+      <p>Type: {{ exam.type }}</p>
+      <p>Date: {{ exam.date }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <a mat-button color="primary" [routerLink]="['/imaging', exam.id]">View Details</a>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -22,3 +22,18 @@
 .full-width {
   width: 100%;
 }
+
+.error-message {
+  color: red;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.login-link {
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+  text-decoration: underline;
+  color: var(--color-text, #5e35b1);
+}
+

@@ -2,8 +2,8 @@ import {
   Controller,
   Post,
   Body,
-  UnauthorizedException,
-  BadRequestException
+  BadRequestException,
+  UnauthorizedException
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto } from 'src/dto/login.dto';
@@ -14,8 +14,8 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('login')
-  async login(@Body() loginDto: LoginDto): Promise<any> {
-    const { email, password } = loginDto;
+  async login(@Body() dto: LoginDto): Promise<any> {
+    const { email, password } = dto;
 
     if (!email || !password) {
       throw new BadRequestException('E-mail e senha são obrigatórios');
@@ -31,13 +31,13 @@ export class AuthController {
   }
 
   @Post('register')
-  async register(@Body() registerDto: RegisterDto): Promise<any> {
-    const { name, email, password } = registerDto;
+  async register(@Body() dto: RegisterDto): Promise<any> {
+    const { name, email, password } = dto;
 
     if (!name || !email || !password) {
       throw new BadRequestException('Nome, e-mail e senha são obrigatórios');
     }
 
-    return this.authService.register(registerDto);
+    return this.authService.register(dto);
   }
 }

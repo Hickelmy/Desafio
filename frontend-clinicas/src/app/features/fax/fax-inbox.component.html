@@ -1,0 +1,79 @@
+<div class="fax-container">
+  <div class="left">
+    <h2>New Fax</h2>
+
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>From</mat-label>
+      <input matInput formControlName="from" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>To</mat-label>
+      <input matInput formControlName="to" />
+    </mat-form-field>
+
+    <div class="attachments">
+      <div *ngFor="let file of attachments" class="file-pill">
+        <mat-icon>attach_file</mat-icon> {{ file }}
+      </div>
+      <div class="drop">Drag and Drop or click to search</div>
+    </div>
+
+    <mat-checkbox formControlName="addCoverSheet">Add Cover Sheet</mat-checkbox>
+
+    <div class="cover-sheet">
+      <div class="form-side">
+        <mat-form-field class="full">
+          <mat-label>Fax From</mat-label>
+          <input matInput formControlName="faxFrom" />
+        </mat-form-field>
+
+        <mat-form-field class="full">
+          <mat-label>Fax To</mat-label>
+          <input matInput formControlName="faxTo" />
+        </mat-form-field>
+
+        <mat-form-field class="full">
+          <mat-label>How Many Pages?</mat-label>
+          <input matInput formControlName="pages" />
+        </mat-form-field>
+
+        <mat-form-field class="full">
+          <mat-label>Fax Contents</mat-label>
+          <input matInput formControlName="contents" />
+        </mat-form-field>
+
+        <mat-form-field class="full">
+          <mat-label>Notes</mat-label>
+          <input matInput formControlName="notes" />
+        </mat-form-field>
+      </div>
+
+      <mat-card class="preview">
+        <strong>Cover Sheet Preview</strong>
+        <p>From: {{ form.value.faxFrom || '—' }}</p>
+        <p>To: {{ form.value.faxTo || '—' }}</p>
+        <p>Pages: {{ form.value.pages || '—' }}</p>
+        <p>Contents: {{ form.value.contents || '—' }}</p>
+        <p>Notes: {{ form.value.notes || '—' }}</p>
+      </mat-card>
+    </div>
+
+    <mat-checkbox formControlName="sendEmail">Send Email Confirmation</mat-checkbox>
+
+    <div class="send-btn">
+      <button mat-raised-button color="primary" (click)="sendFax()">Send</button>
+    </div>
+  </div>
+
+  <div class="right">
+    <h3>Instructions</h3>
+    <p><strong>Subtitle about Instructions</strong></p>
+    <p>Bacon ipsum dolor amet porchetta leberkas...</p>
+
+    <p><strong>Subtitle about Instructions</strong></p>
+    <p>More bacon text here...</p>
+
+    <mat-card class="video">YouTube Video</mat-card>
+  </div>
+</div>

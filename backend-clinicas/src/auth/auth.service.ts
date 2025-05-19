@@ -12,34 +12,58 @@ export class AuthService {
   constructor(
     @InjectRepository(User)
     private readonly usersRepository: Repository<User>,
-    private readonly jwtService: JwtService,
+    private readonly jwtService: JwtService
   ) {}
 
   async validateUser(email: string, password: string): Promise<User | null> {
     const user = await this.usersRepository.findOne({ where: { email } });
-    if (user && await bcrypt.compare(password, user.password)) {
-      return user;
-    }
-    return null;
+
+    if (!user) return null;
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    return isPasswordValid ? user : null;
   }
 
-  async login(user: User): Promise<{ access_token: string }> {
+  async login(user: User): Promise<{
+    access_token: string;
+    user: {
+      id: string;
+      name: string;
+      email: string;
+      avatar?: string;
+    };
+  }> {
     const payload = { sub: user.id, email: user.email };
     const access_token = this.jwtService.sign(payload);
-    return { access_token };
+
+    const { id, name, email, avatar } = user;
+
+    return {
+      access_token,
+      user: {
+        id,
+        name,
+        email,
+        avatar
+      }
+    };
   }
 
-  async register(data: RegisterDto): Promise<User> {
-    const exists = await this.usersRepository.findOne({ where: { email: data.email } });
+  async register(data: RegisterDto & { avatar?: string }): Promise<User> {
+    const { name, email, password, avatar } = data;
+
+    const exists = await this.usersRepository.findOne({ where: { email } });
     if (exists) {
       throw new ConflictException('Usuário já registrado');
     }
 
-    const hashedPassword = await bcrypt.hash(data.password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const newUser = this.usersRepository.create({
-      email: data.email,
+      name,
+      email,
       password: hashedPassword,
-      name: data.name,
+      avatar
     });
 
     return this.usersRepository.save(newUser);

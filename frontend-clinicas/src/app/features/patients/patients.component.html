@@ -1,0 +1,88 @@
+<div class="header">
+  <h2>Patients List</h2>
+  <div class="header-actions">
+    <button mat-stroked-button color="primary"><mat-icon>upload</mat-icon> Import</button>
+    <button mat-raised-button color="primary"><mat-icon>add</mat-icon> New Patient</button>
+  </div>
+</div>
+
+<div class="filter-bar">
+  <button mat-button>All</button>
+  <button mat-button color="primary">Active</button>
+  <button mat-button>Inactive</button>
+
+  <span class="spacer"></span>
+
+  <mat-form-field appearance="outline" class="search">
+    <mat-label>Search</mat-label>
+    <input matInput placeholder="Search by name, phone, email..." />
+  </mat-form-field>
+
+  <button mat-icon-button><mat-icon>filter_list</mat-icon></button>
+</div>
+
+<mat-table [dataSource]="patients" class="mat-elevation-z1">
+
+  <ng-container matColumnDef="select">
+    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+    <mat-cell *matCellDef="let p">
+      <input type="checkbox" />
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="patient">
+    <mat-header-cell *matHeaderCellDef>Patient name</mat-header-cell>
+    <mat-cell *matCellDef="let p; let i = index">
+      <div class="patient-info">
+        <img [src]="getAvatar(p.avatar, i)" alt="avatar" />
+        <div>
+          <strong>{{ p.name }}</strong>
+          <div class="sub">P{{ (i + 1).toString().padStart(4, '0') }}</div>
+        </div>
+      </div>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="contact">
+    <mat-header-cell *matHeaderCellDef>Contact details</mat-header-cell>
+    <mat-cell *matCellDef="let p">
+      <div>{{ p.phone }}</div>
+      <div class="sub">{{ p.email }}</div>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="birth">
+    <mat-header-cell *matHeaderCellDef>Date of Birth</mat-header-cell>
+    <mat-cell *matCellDef="let p">
+      {{ p.dob | date:'mediumDate' }}
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+    <mat-cell *matCellDef="let p">
+      <mat-chip [color]="getStatusColor(p.status)" selected>{{ p.status }}</mat-chip>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="doctor">
+    <mat-header-cell *matHeaderCellDef>Doctor Assigned</mat-header-cell>
+    <mat-cell *matCellDef="let p">{{ p.doctor }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="lastVisit">
+    <mat-header-cell *matHeaderCellDef>Last Visit</mat-header-cell>
+    <mat-cell *matCellDef="let p">{{ p.lastVisit | date:'mediumDate' }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+    <mat-cell *matCellDef="let p">
+      <button mat-icon-button><mat-icon>more_vert</mat-icon></button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+</mat-table>

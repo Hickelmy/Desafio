@@ -1,0 +1,29 @@
+.layout-container {
+  height: 100vh;
+  background-color: var(--bg-main, #f9fafb);
+}
+
+.sidebar {
+  width: 220px;
+  min-width: 220px;
+  max-width: 220px;
+  background-color: var(--sidebar-bg, #ffffff);
+  border-right: 1px solid #eee;
+  border-radius: 0;
+}
+
+.content-area {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--bg-main, #f9fafb);
+}
+
+.main-content {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  background-color: var(--bg-main, #f9fafb);
+}
+

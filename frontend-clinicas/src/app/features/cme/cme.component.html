@@ -1,0 +1,38 @@
+<h2>Central de Material Esterilizado (CME)</h2>
+
+<form [formGroup]="form" (ngSubmit)="addMaterial()" class="form">
+  <mat-form-field appearance="outline" class="field">
+    <mat-label>Nome do material</mat-label>
+    <input matInput formControlName="name" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="field">
+    <mat-label>Status</mat-label>
+    <mat-select formControlName="status">
+      <mat-option value="Esterilizado">Esterilizado</mat-option>
+      <mat-option value="Sujo">Sujo</mat-option>
+      <mat-option value="Em uso">Em uso</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Cadastrar</button>
+</form>
+
+<mat-table [dataSource]="materials" class="table">
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef>Material</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.name }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <mat-chip [color]="getStatusColor(element.status)" selected>
+        {{ element.status }}
+      </mat-chip>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

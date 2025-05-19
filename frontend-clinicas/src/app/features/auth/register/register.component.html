@@ -1,11 +1,51 @@
-<div class="login-wrapper">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="login-card">
-    <h2>Registro</h2>
+<div class="wrapper">
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="card"
+    aria-label="Formulário de Registro"
+    autocomplete="off"
+  >
+    <h2 class="form-title">Registro</h2>
+
+    <div class="avatar-container">
+      <label for="avatarUpload" class="avatar-label" aria-label="Selecionar Avatar">
+        <ng-container *ngIf="avatarLoading; else avatarContent">
+          <div class="avatar-loading">
+            <mat-spinner diameter="40" strokeWidth="4"></mat-spinner>
+          </div>
+        </ng-container>
+
+        <ng-template #avatarContent>
+          <ng-container *ngIf="avatarPreview; else fallbackAvatar">
+            <img
+              [src]="avatarPreview"
+              class="avatar-preview"
+              alt="Avatar Selecionado"
+              loading="lazy"
+            />
+          </ng-container>
+          <ng-template #fallbackAvatar>
+            <div class="avatar-fallback" aria-label="Inicial do Nome">
+              {{ form.get('name')?.value?.charAt(0)?.toUpperCase() || '?' }}
+            </div>
+          </ng-template>
+        </ng-template>
+
+        <input
+          id="avatarUpload"
+          type="file"
+          accept="image/*"
+          (change)="onAvatarSelected($event)"
+          hidden
+        />
+      </label>
+    </div>
 
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Nome</mat-label>
-      <input matInput formControlName="nome" />
-      <mat-error *ngIf="form.get('nome')?.hasError('required')">Campo obrigatório</mat-error>
+      <input matInput formControlName="name" />
+      <mat-error *ngIf="form.get('name')?.hasError('required')">Campo obrigatório</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full-width">
@@ -17,16 +57,54 @@
 
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Senha</mat-label>
-      <input matInput formControlName="senha" type="password" />
-      <mat-error *ngIf="form.get('senha')?.hasError('required')">Campo obrigatório</mat-error>
+      <input
+        matInput
+        [type]="hidePassword ? 'password' : 'text'"
+        formControlName="password"
+        aria-describedby="password-strength"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        type="button"
+        tabindex="-1"
+        (click)="hidePassword = !hidePassword"
+        [attr.aria-label]="hidePassword ? 'Mostrar senha' : 'Esconder senha'"
+      >
+        <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+      <mat-error *ngIf="form.get('password')?.hasError('required')">Campo obrigatório</mat-error>
     </mat-form-field>
 
-    <button mat-raised-button color="primary" class="full-width" type="submit">
+    <div class="password-strength-bar" id="password-strength">
+      <div
+        class="strength-fill"
+        [ngStyle]="{
+          width: passwordStrengthPercent + '%',
+          backgroundColor: strengthColor
+        }"
+      ></div>
+    </div>
+
+    <ul class="password-requirements" aria-label="Critérios da Senha">
+      <li [class.valid]="hasUpperLowerCase">Lowercase & Uppercase</li>
+      <li [class.valid]="hasNumber">Number (0–9)</li>
+      <li [class.valid]="hasSpecialChar">Special Character (!&#64;#$%^&*)</li>
+      <li [class.valid]="hasMinLength">At least 8 Characters</li>
+    </ul>
+
+    <button
+      mat-raised-button
+      color="primary"
+      class="full-width"
+      type="submit"
+      [disabled]="form.invalid || loading"
+    >
       REGISTRAR
     </button>
 
-    <div *ngIf="error" style="color: red;">{{ error }}</div>
+    <div *ngIf="error" class="error-message">{{ error }}</div>
 
-    <a routerLink="/login" style="margin-top: 1rem; display: block; text-align: center;">Já tem uma conta? Fazer login</a>
+    <a routerLink="/login" class="login-link">Já tem uma conta? Fazer login</a>
   </form>
 </div>

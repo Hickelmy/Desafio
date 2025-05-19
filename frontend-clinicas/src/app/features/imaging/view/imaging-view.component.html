@@ -1,0 +1,27 @@
+<button mat-button color="primary" routerLink="/imaging">
+  <mat-icon>arrow_back</mat-icon>
+  Back to Imaging List
+</button>
+
+<ng-container *ngIf="exam as ex">
+  <h2 class="title">{{ ex.title }}</h2>
+
+  <div class="exam-container">
+    <div class="exam-images">
+      <img [src]="ex.imageMain" class="image-main" alt="Main Imaging" />
+      <img [src]="ex.imageSide" class="image-side" alt="Secondary Imaging" />
+    </div>
+
+    <mat-card class="exam-patient-card">
+      <mat-card-header>
+        <mat-card-title>Patient Information</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Name:</strong> {{ ex.patient.name }}</p>
+        <p><strong>Age:</strong> {{ ex.patient.age }}</p>
+        <p><strong>Complaint:</strong> {{ ex.patient.complaint }}</p>
+        <p><strong>Admission:</strong> {{ ex.patient.admission | date:'mediumDate' }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</ng-container>

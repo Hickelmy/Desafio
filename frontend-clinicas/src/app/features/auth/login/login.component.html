@@ -1,29 +1,83 @@
 <div class="login-wrapper">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="login-card">
-    <h2>Login</h2>
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="login-card"
+    aria-label="Formulário de Login"
+    autocomplete="off"
+  >
+    <h2 class="form-title">Login</h2>
 
+    <!-- 📧 Campo: E-mail -->
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>E-mail</mat-label>
-      <input matInput formControlName="email" type="email" />
-      <mat-error *ngIf="form.get('email')?.hasError('required')">Campo obrigatório</mat-error>
-      <mat-error *ngIf="form.get('email')?.hasError('email')">E-mail inválido</mat-error>
+      <input
+        matInput
+        type="email"
+        formControlName="email"
+        autocomplete="email"
+        aria-required="true"
+      />
+      <mat-error *ngIf="submitted && form.get('email')?.hasError('required')">
+        Campo obrigatório
+      </mat-error>
+      <mat-error *ngIf="submitted && form.get('email')?.hasError('email')">
+        E-mail inválido
+      </mat-error>
     </mat-form-field>
 
+    <!-- 🔒 Campo: Senha com botão para mostrar/esconder -->
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Senha</mat-label>
-      <input matInput formControlName="senha" type="password" />
-      <mat-error *ngIf="form.get('senha')?.hasError('required')">Campo obrigatório</mat-error>
+      <input
+        matInput
+        [type]="hidePassword ? 'password' : 'text'"
+        formControlName="password"
+        autocomplete="current-password"
+        aria-required="true"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        type="button"
+        tabindex="-1"
+        (click)="hidePassword = !hidePassword"
+        [attr.aria-label]="hidePassword ? 'Mostrar senha' : 'Esconder senha'"
+      >
+        <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+      <mat-error *ngIf="submitted && form.get('password')?.hasError('required')">
+        Campo obrigatório
+      </mat-error>
     </mat-form-field>
 
-    <button mat-raised-button color="primary" class="full-width" type="submit">
-      ENTRAR
+    <!-- 🔘 Botão: ENTRAR com spinner -->
+    <button
+      mat-raised-button
+      color="primary"
+      class="full-width"
+      type="submit"
+      [disabled]="form.invalid || loading"
+    >
+      <ng-container *ngIf="!loading; else loadingTpl">ENTRAR</ng-container>
     </button>
 
-    <div *ngIf="error" style="color: red; margin-top: 0.5rem;">
+    <ng-template #loadingTpl>
+      <mat-progress-spinner
+        diameter="22"
+        mode="indeterminate"
+        strokeWidth="3"
+        color="primary"
+      ></mat-progress-spinner>
+    </ng-template>
+
+    <!-- ⚠️ Mensagem de erro -->
+    <div *ngIf="error" class="error-message" role="alert">
       {{ error }}
     </div>
 
-    <a routerLink="/register" style="margin-top: 1rem; display: block; text-align: center;">
+    <!-- 🔗 Link para registro -->
+    <a routerLink="/register" class="login-link">
       Não tem conta? Cadastre-se
     </a>
   </form>

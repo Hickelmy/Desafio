@@ -5,7 +5,7 @@ html, body {
 }
 
 ::ng-deep .custom-modal-panel {
-  background: rgba(0, 0, 0, 0.6); // overlay escuro
+  background: rgba(0, 0, 0, 0.6); 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,20 +17,30 @@ html, body {
   background: white;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
 }
-
 :root {
-  --bg-main: #f9fafb; // claro
-  --sidebar-bg: #f1f5f9;
-  --sidebar-text: #1e293b;
-  --brand-color: #0ea5e9;
-  --brand-rgb: 14, 165, 233;
+  --sidebar-bg: #ffffff;
+  --sidebar-text: #1e1e1e;
+  --sidebar-border: #eee;
+  --sidebar-hover-bg: #f5f5f5;
+  --sidebar-active-bg: #e2e8f0;
+  --primary-color: #38bdf8;
+  --topbar-bg: #ffffff;
+  --topbar-text: #1e1e1e;
+  --topbar-text: #1e1e1e;
+  --bg-main: #f9fafb;
 }
 
-.dark {
-  --bg-main: #1e1e2f; // escuro
-  --sidebar-bg: #111827;
+[data-theme='dark'] {
+  --sidebar-bg: #1f2937;
   --sidebar-text: #e5e7eb;
-  --brand-color: #38bdf8;
-  --brand-rgb: 56, 189, 248;
+  --sidebar-border: #374151;
+  --sidebar-hover-bg: #374151;
+  --sidebar-active-bg: #4b5563;
+  --primary-color: #60a5fa;
+  --topbar-bg: #1e1e1e;
+  --topbar-text: #ffffff;
+  --bg-main: #111827;
 }
+
+
 

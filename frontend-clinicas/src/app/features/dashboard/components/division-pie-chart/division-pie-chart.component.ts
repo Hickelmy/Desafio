@@ -22,7 +22,7 @@ export class DivisionPieChartComponent implements OnInit {
     name: 'custom',
     selectable: true,
     group: ScaleType.Ordinal,
-    domain: [] as string[]  // 👈 força a tipagem correta
+    domain: [] as string[]  
   };
 
   ngOnInit(): void {

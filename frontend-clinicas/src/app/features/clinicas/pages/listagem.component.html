@@ -1,0 +1,123 @@
+<!-- listagem.component.html -->
+
+<div class="listagem-header">
+  <h2 class="titulo">Clínicas Cadastradas</h2>
+  <div class="acoes">
+    <mat-form-field appearance="outline" class="filtro-form-field">
+      <mat-icon matPrefix>search</mat-icon>
+      <input
+        matInput
+        [formControl]="filtro"
+        placeholder="Digite nome ou CNPJ"
+        autocomplete="off"
+      />
+    </mat-form-field>
+
+    <button
+      mat-flat-button
+      color="primary"
+      class="novo-btn"
+      (click)="abrirCadastro()"
+    >
+      <mat-icon>add</mat-icon>
+      Nova Clínica
+    </button>
+  </div>
+</div>
+
+<!-- Spinner enquanto carrega -->
+<div class="loading-container" *ngIf="loading$ | async">
+  <mat-spinner diameter="40"></mat-spinner>
+</div>
+
+<ng-container *ngIf="!(loading$ | async)">
+  <ng-container *ngIf="(clinicas$ | async) as clinicas">
+    <!-- Tabela só se houver dados -->
+    <mat-table
+      *ngIf="clinicas.length; else noData"
+      [dataSource]="clinicas"
+      class="mat-elevation-z2 responsive-table"
+    >
+      <!-- Nome Fantasia -->
+      <ng-container matColumnDef="nomeFantasia">
+        <mat-header-cell *matHeaderCellDef>Nome Fantasia</mat-header-cell>
+        <mat-cell *matCellDef="let c">{{ c.nomeFantasia }}</mat-cell>
+      </ng-container>
+
+      <!-- CNPJ -->
+      <ng-container matColumnDef="cnpj">
+        <mat-header-cell *matHeaderCellDef>CNPJ</mat-header-cell>
+        <mat-cell *matCellDef="let c">{{ c.cnpj }}</mat-cell>
+      </ng-container>
+
+      <!-- Regional -->
+      <ng-container matColumnDef="regional">
+        <mat-header-cell *matHeaderCellDef>Regional</mat-header-cell>
+        <mat-cell *matCellDef="let c">{{ c.regional }}</mat-cell>
+      </ng-container>
+
+      <!-- Data de Inauguração -->
+      <ng-container matColumnDef="dataInauguracao">
+        <mat-header-cell *matHeaderCellDef>Inauguração</mat-header-cell>
+        <mat-cell *matCellDef="let c">
+          {{ c.dataInauguracao | date: 'shortDate' }}
+        </mat-cell>
+      </ng-container>
+
+      <!-- Status -->
+      <ng-container matColumnDef="ativa">
+        <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+        <mat-cell *matCellDef="let c">
+          <mat-chip [color]="c.ativa ? 'primary' : 'warn'" selected>
+            {{ c.ativa ? 'Ativa' : 'Inativa' }}
+          </mat-chip>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Ações -->
+      <ng-container matColumnDef="acoes">
+        <mat-header-cell *matHeaderCellDef>Ações</mat-header-cell>
+        <mat-cell *matCellDef="let c">
+          <button
+            mat-icon-button
+            color="primary"
+            (click)="visualizar(c.id)"
+            aria-label="Visualizar"
+          >
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            color="accent"
+            (click)="editar(c.id)"
+            aria-label="Editar"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row
+        *matHeaderRowDef="displayedColumns"
+      ></mat-header-row>
+      <mat-row
+        *matRowDef="let row; columns: displayedColumns"
+      ></mat-row>
+    </mat-table>
+
+    <!-- Paginator -->
+    <mat-paginator
+      [length]="total$ | async"
+      [pageSize]="pageSize"
+      [pageIndex]="pageIndex"
+      [pageSizeOptions]="[5, 10, 25]"
+      showFirstLastButtons
+      (page)="pageChanged($event)"
+    ></mat-paginator>
+  </ng-container>
+
+  <!-- Sem resultados -->
+  <ng-template #noData>
+    <p class="nenhum">Nenhuma clínica encontrada.</p>
+  </ng-template>
+</ng-container>

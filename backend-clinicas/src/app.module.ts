@@ -5,11 +5,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ClinicasModule } from './clinicas/clinicas.module';
+import { SeedModule } from './seed/seed.module';
+import { EspecialidadeModule } from './especialidades/especialidade.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true, // permite acesso a process.env globalmente
+      isGlobal: true, 
     }),
 
     TypeOrmModule.forRoot({
@@ -26,6 +28,8 @@ import { ClinicasModule } from './clinicas/clinicas.module';
     AuthModule,
     UsersModule,
     ClinicasModule,
+    EspecialidadeModule,
+    SeedModule
   ],
 })
 export class AppModule {}
